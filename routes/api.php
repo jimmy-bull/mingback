@@ -63,3 +63,6 @@ Route::prefix('weekly-items')->group(function () {
 });
 
 
+
+
+// ngrok http --url=mingback.ngrok.app 80
