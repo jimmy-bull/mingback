@@ -9,6 +9,7 @@ class Menu extends Model
 {
     use HasFactory;
     // Spécifier le nom de la table (au singulier)
+        // Spécifier le nom de la table (au singulier)
     protected $table = 'menu';
     protected $fillable = [
         'name',
