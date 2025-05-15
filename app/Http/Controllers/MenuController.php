@@ -5,7 +5,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Menu;
+use App\Models\Menus;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
@@ -15,7 +15,7 @@ class MenuController extends Controller
 {
     public function index(): JsonResponse
     {
-        $menus = Menu::all();
+        $menus = Menus::all();
         return response()->json($menus);
     }
 
@@ -96,14 +96,14 @@ class MenuController extends Controller
         return "added";
     }
 
-    public function show(Menu $menu): JsonResponse
+    public function show(Menus $menu): JsonResponse
     {
         return response()->json($menu);
     }
 
     public function getMenuById(int $id): JsonResponse
     {
-        $menu = Menu::find($id);
+        $menu = Menus::find($id);
         if (!$menu) {
             return response()->json(['message' => 'Menu not found'], 404);
         }
@@ -112,7 +112,7 @@ class MenuController extends Controller
 
     public function destroy(Request $request)
     {
-        Menu::where("id", "=", $request->id)->delete();
+        Menus::where("id", "=", $request->id)->delete();
         return "deleted";
     }
 }

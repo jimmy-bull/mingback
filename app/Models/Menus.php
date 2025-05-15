@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Menu extends Model
+class Menus extends Model
 {
     use HasFactory;
     // Spécifier le nom de la table (au singulier)
