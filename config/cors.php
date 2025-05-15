@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://127.0.0.1:3000', "http://localhost:3000"],
+    'allowed_origins' => ['http://127.0.0.1:3000', "http://localhost:3000","https://menudashboard-production.up.railway.app/"],
 
     'allowed_origins_patterns' => [],
 
