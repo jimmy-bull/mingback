@@ -62,7 +62,7 @@ Route::prefix('weekly-items')->group(function () {
     Route::post('/delete-all-weekly-items', [SubMenuController::class, 'deleteAllWeeklyItems']);
 });
 
-
-
+Route::post('add_week_pdf', [MenuController::class, 'addWeekPdf']);
+Route::get('week_pdfs', [MenuController::class, 'getWeekPdfs']);
 
 // ngrok http --url=mingback.ngrok.app 80

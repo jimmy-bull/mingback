@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use App\Models\WeekPdf;
 
 class MenuController extends Controller
 {
@@ -94,6 +95,54 @@ class MenuController extends Controller
         );
 
         return "added";
+    }
+
+    /**
+     * Ajoute un pdf_path dans la table week_pdfs
+     *
+     * Route suggérée :
+     * Route::post('add_week_pdf', [MenuController::class, 'addWeekPdf']);
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function addWeekPdf(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'pdf_path' => 'required|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        // Supprimer l'ancien PDF (seulement de la base de données)
+        $oldPdf = WeekPdf::first();
+        if ($oldPdf) {
+            $oldPdf->delete();
+        }
+
+        $weekPdf = WeekPdf::create([
+            'pdf_path' => $request->pdf_path,
+        ]);
+
+        return response()->json($weekPdf, 201);
+    }
+
+    /**
+     * Récupère tous les pdf_path de la table week_pdfs
+     *
+     * Route suggérée :
+     * Route::get('week_pdfs', [MenuController::class, 'getWeekPdfs']);
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getWeekPdfs(): JsonResponse
+    {
+        $weekPdfs = WeekPdf::all();
+        return response()->json($weekPdfs);
     }
 
     public function show(Menus $menu): JsonResponse
